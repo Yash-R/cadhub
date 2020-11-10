@@ -71,17 +71,12 @@ const MainLayout = ({ children}) => {
           </ul>
           <ul className="flex items-center">
             <li className={getActiveClasses("mr-8 h-10 w-10 rounded-full border-2 border-gray-700 flex items-center justify-center", {'border-indigo-300': currentUser})}>
-              <button className="h-full w-full">
-              {
-                isAuthenticated?
-                <Link to={routes.newPart2({userName: data?.user?.userName})}>
-                  <Svg name="plus" className={getActiveClasses("text-gray-700 w-full h-full",{'text-indigo-300': currentUser})} />
-              </Link>:
-              <Link to="#">
-                  <Svg name="plus" className={getActiveClasses("text-gray-700 w-full h-full",{'text-indigo-300': currentUser})} />
-              </Link>
+              {isAuthenticated && data?.user?.userName ?
+                <Link className="h-full w-full" to={routes.newPart2({userName: data?.user?.userName})}>
+                  <Svg name="plus" className="text-indigo-300 w-full h-full" />
+                </Link>:
+                <Svg name="plus" className="text-gray-700 w-full h-full" />
               }
-              </button>
             </li>
             <li className="h-10 w-10 border-1 rounded-full border-indigo-300 text-indigo-200">
             <div aria-describedby={popoverId} onMouseOver={togglePopover}>
